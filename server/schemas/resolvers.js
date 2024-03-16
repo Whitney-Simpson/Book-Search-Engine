@@ -6,7 +6,7 @@ const resolvers = {
       if (context.user) {
         return User.findOne({ _id: context.user._id })
       }
-      throw AuthenticationError;
+      throw new AuthenticationError('not logged in');
     },
     users: async () =>{
       return User.find({})
@@ -22,13 +22,13 @@ const resolvers = {
       const user = await User.findOne({ email });
 
       if (!user) {
-        throw AuthenticationError;
+        throw new AuthenticationError;
       }
 
       const correctPw = await user.isCorrectPassword(password);
 
       if (!correctPw) {
-        throw AuthenticationError;
+        throw new AuthenticationError;
       }
 
       const token = signToken(user);
