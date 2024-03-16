@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@apollo/server": "^4.10.0",
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "jsonwebtoken": "^8.5.1"
   }
 }

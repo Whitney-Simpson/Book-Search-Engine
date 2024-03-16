@@ -1,12 +1,13 @@
+const { signToken, AuthenticationError } = require('../utils/auth.js');
 const { User } = require('../models');
-const { signToken, AuthenticationError } = require('../utils/auth');
+
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id })
       }
-      throw new AuthenticationError('not logged in');
+      throw AuthenticationError;
     },
     users: async () =>{
       return User.find({})
@@ -22,13 +23,13 @@ const resolvers = {
       const user = await User.findOne({ email });
 
       if (!user) {
-        throw new AuthenticationError;
+        throw AuthenticationError;
       }
 
       const correctPw = await user.isCorrectPassword(password);
 
       if (!correctPw) {
-        throw new AuthenticationError;
+        throw AuthenticationError;
       }
 
       const token = signToken(user);
