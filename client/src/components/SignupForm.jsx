@@ -38,7 +38,7 @@ const SignupForm = () => {
       const { data } = await addUser({
         variables: { ...userFormData },
       });
-console.log(data);
+console.log(data.addUser.token);
       Auth.login(data.addUser.token);
     } catch (e) {
       console.error(e);
@@ -69,6 +69,8 @@ console.log(data);
             onChange={handleInputChange}
             value={userFormData.username}
             required
+            //loads username from saved forms
+            autoComplete='username'
           />
           <Form.Control.Feedback type='invalid'>Username is required!</Form.Control.Feedback>
         </Form.Group>
