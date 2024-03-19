@@ -6,6 +6,7 @@ export const LOGIN = gql`
       token
       user {
         _id
+        username
       }
     }
   }
@@ -39,4 +40,22 @@ export const SAVE_BOOK = gql`
         }
       
     }
+    
   }`
+  export const REMOVE_BOOK = gql`
+  mutation removeBook($bookId: ID!) {
+    removeBook(bookId: $bookId) {
+      _id
+      username
+      email
+      savedBooks {
+        bookId
+        authors
+        image
+        description
+        title
+        link
+      }
+    }
+  }
+`;
